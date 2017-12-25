@@ -1,0 +1,61 @@
+md2-datepicker {
+    max-width: none !important;
+    position: absolute;
+}
+
+md2-datepicker .md2-datepicker-input-container {
+    padding-left: 0;
+    padding-right: 30px;
+}
+
+.md2-datepicker-input-container .md2-datepicker-placeholder,
+.md2-datepicker-input-container .md2-datepicker-input-text {
+    text-align: left;
+}
+
+.md2-datepicker-input-container .md2-datepicker-calendar-icon {
+    left: auto;
+    right: 0;
+}
+
+.md2-datepicker-input-container .md2-datepicker-calendar-icon:before {
+    display: inline-block;
+    content: '\e80a';
+    font-size: 1.3rem;
+    font-family: 'fontello';
+}
+
+.md2-datepicker-input-container svg {
+    display: none;
+}
+
+md2-datepicker .md2-datepicker-header {
+    background: #673ab7;
+}
+
+md2-datepicker .md2-calendar-month th {
+    text-align: center;
+}
+
+md2-datepicker .md2-calendar-day:hover,
+md2-datepicker .md2-calendar-day.focus {
+    background: #24952d;
+    color: #fff;
+}
+
+md2-datepicker .md2-datepicker-footer .md2-button {
+    color: #673ab7;
+}
+
+md2-datepicker:focus .md2-datepicker-input-container .md2-datepicker-placeholder {
+    color: #673ab7;
+}
+
+md2-datepicker:focus .md2-datepicker-input{
+    border-color: #673ab7;
+    border-bottom: 2px solid #673ab7;
+}
+
+md2-datepicker .md2-datepicker-wrapper{
+    z-index: 500;
+}

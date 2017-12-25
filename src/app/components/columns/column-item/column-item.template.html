@@ -1,0 +1,85 @@
+<!--
+<div class="column">
+  <div class="column-title">{{column.title}}
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+  </div>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item
+            (click)="deleteColumn(column)">
+      <mat-icon>delete</mat-icon>
+      <span>Delete</span>
+    </button>
+  </mat-menu>
+  <div>
+    <button mat-mini-fab color="primary" (click)="addCard()">Add</button>
+    <div class="dropzone"
+         >
+
+
+    <app-cards></app-cards>
+    </div>
+  </div>
+</div>
+-->
+<div class="column-width ">
+  <div class="column-background">
+    <div class="column-title"
+         *ngIf="!changeColumn || !column.title"
+         [matMenuTriggerFor]="menu">
+      <h3>{{column.title}}</h3>
+    </div>
+    <form (ngSubmit)="changeColumnTitle()"
+          [formGroup]="titleForm">
+
+      <div *ngIf="changeColumn ">
+        <mat-input-container>
+          <input
+            matInput
+            autofocus="autofocus"
+            placeholder="Column title"
+            formControlName="title">
+        </mat-input-container>
+        <div class="btn-row">
+          <button class="btn-row-save"
+                  mat-button
+                  type="submit"
+                  [disabled]="titleForm.invalid">
+            <mat-icon class="save-icon">save</mat-icon>
+          </button>
+          <button class="btn-row-clear"
+                  mat-button
+                  type="button"
+                  (click)="clearCardTitle()">
+            <mat-icon class="clear-icon">clear</mat-icon>
+          </button>
+        </div>
+
+      </div>
+      <mat-card class="alert" *ngIf="!titleForm.controls['title'].valid
+                        && titleForm.controls['title'].touched">
+        You must specify title by 40 characters
+      </mat-card>
+    </form>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item
+              type="button"
+              (click)="editColumnTitle()">
+        <mat-icon>create</mat-icon>
+        <span>Rename</span>
+      </button>
+      <button mat-menu-item
+              type="button"
+              (click)="openDialog()">
+        <mat-icon>delete</mat-icon>
+        <span>Delete</span>
+      </button>
+    </mat-menu>
+    <app-cards></app-cards>
+  </div>
+</div>
+
+
+
+

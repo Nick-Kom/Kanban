@@ -1,0 +1,21 @@
+<div class="sign-up-wrap">
+
+  <mat-card class="sign-up">
+
+
+    <h2>Join now</h2>
+    <span class="error" *ngIf="error">{{ error }}</span>
+    <form #formData='ngForm' (ngSubmit)="onSubmit(formData)" class="sign-up-form">
+      <mat-form-field class="input-full-width">
+        <input type="text" matInput placeholder="Nickname.." (ngModel)="nickname" name="nickname" class="txt" required>
+      </mat-form-field> <mat-form-field class="input-full-width">
+        <input type="email" matInput placeholder="Email address.." (ngModel)="email" name="email" class="txt" required>
+      </mat-form-field>
+      <mat-form-field class="input-full-width">
+        <input type="password" matInput placeholder="Password..." (ngModel)="password" name="password" required>
+      </mat-form-field>
+      <button class="new-account" mat-raised-button color="primary" type="submit" [disabled]="!formData.valid">Create  account</button>
+    </form>
+    <a routerLink="/login" class="goback"><strong>< Go back</strong> </a>
+  </mat-card>
+</div>

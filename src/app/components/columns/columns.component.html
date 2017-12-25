@@ -1,0 +1,63 @@
+<!--<div mdTooltip="Add new board">
+  <button class="btn-add"
+          mat-mini-fab
+          (click)="createColumn()">
+    <mat-icon class="btn-add-icon">add</mat-icon>
+  </button>
+</div>
+<div class="columns">
+  <column-item
+    [column]="column"
+    *ngFor="let column of columns">
+  </column-item>
+</div>-->
+
+<div class="column-scrol container">
+<div class=" columns-space">
+  <column-item
+    [column]="column"
+    *ngFor="let column of columns">
+
+  </column-item>
+  <form (ngSubmit)="createColumnTitle(); titleForm.reset()"
+        [formGroup]="titleForm">
+    <div class="column-width" *ngIf="newColumn">
+      <div class="column-background">
+        <mat-input-container>
+          <input matInput
+                 autofocus="autofocus"
+                 placeholder="Column title"
+                 formControlName="title">
+        </mat-input-container>
+        <div class="btn-row">
+          <button class="btn-row-save"
+                  mat-button type="submit"
+                  [disabled]="titleForm.invalid">
+            <mat-icon class="save-icon">save</mat-icon>
+          </button>
+          <button class="btn-row-clear"
+                  mat-button
+                  (click)="clearCardTitle()">
+            <mat-icon class="clear-icon">clear</mat-icon>
+          </button>
+        </div>
+        <mat-card class="alert" *ngIf="!titleForm.controls['title'].valid
+                        && titleForm.controls['title'].touched">
+          You must specify title by 40 characters
+        </mat-card>
+      </div>
+    </div>
+  </form>
+  <div class="add-position">
+    <div matTooltip="Add new column">
+      <button class="btn-add"
+              mat-mini-fab
+              type="button"
+              (click)="showCreateColumn()">
+        <mat-icon class="btn-add-icon">add</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
+</div>
+

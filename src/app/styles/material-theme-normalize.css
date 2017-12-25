@@ -1,0 +1,71 @@
+.md-select .mat-select-trigger {
+    height: auto;
+    margin: 1em 0;
+}
+
+md2-datepicker .md2-datepicker-input-container {
+    padding-top: .6em;
+    padding-bottom: .6em;
+}
+
+md2-datepicker .md2-datepicker-calendar-icon {
+    top: 12px;
+}
+
+md2-datepicker .md2-datepicker-placeholder.has-value,
+md2-datepicker:focus .md2-datepicker-placeholder {
+    transform: translate3d(0, 11px, 0) scale(0.75);
+}
+
+.filter-body .mat-slider {
+    padding: 0;
+}
+
+.filter-body .mat-slider-min-value.mat-slider-thumb-label-showing .mat-slider-thumb,
+.filter-body .mat-slider-min-value.mat-slider-thumb-label-showing .mat-slider-thumb-label {
+    background: #e1e1e1;
+}
+
+.filter-body .mat-slider-horizontal .mat-slider-ticks-container {
+    cursor: pointer;
+}
+
+.filter-body .mat-slider-horizontal {
+    height: auto;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.filter-body .mat-accent .mat-slider-thumb,
+.filter-body .mat-accent .mat-slider-thumb-label,
+.filter-body .mat-accent .mat-slider-track-fill {
+    background-color:  #0275d8;
+}
+
+.filter-body .mat-accent .mat-slider-thumb-label {
+    cursor: pointer;
+}
+
+.filter-body .mat-accent .mat-slider-thumb-label-text {
+    color:#fff;
+}
+
+.search-filter-wrap .mat-tab-label.mat-ripple {
+    background: #fff;
+    opacity: 1;
+}
+
+.search-filter-wrap .mat-tab-label.mat-tab-label-active {
+    background: #0275d8;
+    color: #fff;
+    opacity: 1;
+}
+
+.search-tab-wrap .mat-ink-bar {
+    background: #00539a;
+}
+
+.search-filter-wrap .mat-tab-body.mat-tab-body-active,
+.search-filter-wrap .mat-tab-body-wrapper {
+    overflow: visible!important;
+}

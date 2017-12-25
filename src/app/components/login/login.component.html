@@ -1,0 +1,31 @@
+<div class="login-wrap">
+  <mat-card class="login">
+    <!--<img src="img/login.svg" alt="login">-->
+    <h2>Sign-in</h2>
+    <span class="error" *ngIf="error">{{ error }}</span>
+    <form #formData='ngForm' (ngSubmit)="onSubmit(formData)" class="login-form">
+      <mat-form-field class="input-full-width">
+        <input type="email" matInput placeholder="email" (ngModel)="email" name="email" required>
+      </mat-form-field>
+      <br>
+      <mat-form-field class="input-full-width">
+        <input type="password" matInput placeholder="password" (ngModel)="password" name="password" required>
+      </mat-form-field>
+      <button type="submit"
+              [disabled]="!formData.valid"
+              class="btn" mat-raised-button
+              [disabled]="!formData.valid"  >
+        Sign-in
+      </button>
+    </form>
+    <button (click)="loginGoogle()"
+            mat-raised-button
+            color="primary">
+            Sign-in  with google
+    </button>
+    <p routerLink="/signup"
+       routerLinkActive="active"
+       class="sign-up">No account?
+      <strong>Create one here</strong> </p>
+  </mat-card>
+</div>

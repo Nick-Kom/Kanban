@@ -1,0 +1,51 @@
+
+<div mat-dialog-content>
+  <div class="change-title-description"
+       *ngIf="!cardTitle || !data.card.title "
+       (click)="changeCardTitle()">
+    <p class="title">TITLE</p>
+    <p>{{data.card.title}}</p>
+  </div>
+
+  <div *ngIf="!cardTitle || !data.card.description && !data.card.description==''"
+       class="change-title-description"
+       (click)="changeCardDescription()">
+    <p class="title">DESCRIPTION</p>
+    <p>{{data.card.description}}</p>
+  </div>
+  <form *ngIf="cardTitle"
+        (ngSubmit)="saveCardTitle()"
+        [formGroup]="titleForm">
+
+    <div class="container-margin">
+      <mat-input-container class=" text-full-width">
+        <input
+          matInput
+          placeholder="TITLE"
+          formControlName="title">
+      </mat-input-container>
+      <mat-card class="alert" *ngIf="!titleForm.controls['title'].valid
+                        && titleForm.controls['title'].touched">
+        You must specify title by 40 characters
+      </mat-card>
+      <mat-input-container class=" text-full-width">
+                            <textarea matInput
+                                      placeholder="DESCRIPTION"
+                                      name="description"
+                                      formControlName="description">
+
+                            </textarea>
+      </mat-input-container>
+      <mat-card class="alert"
+                *ngIf="!titleForm.controls['description'].valid
+                                     && titleForm.controls['description'].touched">
+        You must specify description between 10 and 500 characters
+      </mat-card>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="warn" (click)="openDialog()">Delete</button>
+  <span class="example-spacer"></span>
+  <button mat-raised-button [mat-dialog-close]="titleForm.value" tabindex="2">Save</button>
+</div>

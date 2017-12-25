@@ -1,0 +1,11 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <h3>Kanban</h3>
+
+    <span class="example-spacer"></span>
+
+    <p class="user-name" *ngIf=" user.displayName "> {{ user.displayName }} </p>
+    <img class="avatar" *ngIf="user.photoURL"     [src]="user.photoURL" alt="avatar">
+    <button class="logout-btn" (click)="logout()" mat-button>Logout</button>
+  </mat-toolbar-row>
+</mat-toolbar>
