@@ -71,13 +71,17 @@ export class CardService {
   }
 
 
-  getCurrentCard(draggedCard: Card, cardForDeleting: Card,  ) {
-    //if (card.columnId !== this.columnId /*&& this.arrOfCardsCoosen == true*/) {
+  getCurrentCard(card: Card, columnId: string, position: number) {
+   this.deleteCard(card)
+      let draggedCard = {
+        id: card.id,
+        title: card.title,
+        description: card.description,
+        columnId: columnId,
+        position: position
+      }
+   this.addCard(draggedCard)
 
-    this.deleteCard(cardForDeleting)
-    this.addCard(draggedCard)
-
-    // this.arrOfCardsCoosen = false
 
 
   }

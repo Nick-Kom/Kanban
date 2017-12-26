@@ -21,7 +21,8 @@
       "styles": [
         "styles.css",
         "../node_modules/bootstrap/dist/css/bootstrap.css",
-        "../node_modules/dragula/dist/dragula.css"
+        "../node_modules/ng2-dnd/bundles/style.css"
+
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",

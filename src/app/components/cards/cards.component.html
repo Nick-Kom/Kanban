@@ -1,68 +1,52 @@
-
-<!--
-  <card-item   [sortablejs]="cards" [sortablejsOptions]="options"
-    [card]="card"
-              *ngFor="let card of cards">
-  </card-item>
-
-  <div  [sortablejs]="cards" [sortablejsOptions]="options"
-       [runInsideAngular]="true" class="ghost-card">
-  </div>
-
--->
 <div
   class="bag"
-     >
-    <card-item [id]="columnId"
-               [attr.data-title]="card.title"
-               [attr.data-id]="card.id"
-               [attr.data-position]="card.position"
-               [attr.data-description]="card.description"
-               [attr.data-columnid]="card.columnId"
-               [sortablejs]="cards" [sortablejsOptions]="options"
+  dnd-sortable-container [sortableData]="cards">
+
+    <card-item
       class="card-item"
-      *ngFor=" let card of cards"
-      [card]="card" >
+      *ngFor=" let card of cards; let i = index"
+      dnd-sortable
+      [sortableIndex]="i"
+      [dragEnabled]="true"
+      [dragData]="card"
+      dnd-droppable
+      (onDropSuccess)="onMove($event, cards, i, columnId)"
+      [card]="card">
     </card-item>
-  <div *ngIf="hideGhostCard"
-       [id]="columnId"
-       [sortablejs]=" cards"
-       [sortablejsOptions]="options" class="ghost-card">
-  </div>
 
 </div>
-  <form *ngIf="newCard"
-        (ngSubmit)="saveCardTitle();
+<form *ngIf="newCard"
+      (ngSubmit)="saveCardTitle();
                   titleForm.reset()"
-        [formGroup]="titleForm">
+      [formGroup]="titleForm">
 
-    <mat-card class="mdcard-style">
-      <input class="card-title-input"
-             placeholder="card title..."
-             formControlName="title">
-      <mat-card class="alert" *ngIf="!titleForm.controls['title'].valid
+  <mat-card class="mdcard-style">
+    <input class="card-title-input"
+           placeholder="card title..."
+           formControlName="title">
+    <mat-card class="alert" *ngIf="!titleForm.controls['title'].valid
                         && titleForm.controls['title'].touched">
-        You must specify title by and 40 characters
-      </mat-card>
-      <div class="btn-row">
-        <button class="btn-row-save"
-                mat-button
-                type="submit"
-                [disabled]="titleForm.invalid">
-          <mat-icon class="save-icon">save</mat-icon>
-        </button>
-        <button class="btn-row-clear"
-                mat-button
-                type="button"
-                (click)="clearCardTitle(card)">
-          <mat-icon class="clear-icon">clear</mat-icon>
-        </button>
-      </div>
+      You must specify title by and 40 characters
     </mat-card>
-  </form>
-  <div class="add-card">
-    <p class="btn-add"
-       (click)="createCard()">
-      add card
-    </p>
-  </div>
+    <div class="btn-row">
+      <button class="btn-row-save"
+              mat-button
+              type="submit"
+              [disabled]="titleForm.invalid">
+        <mat-icon class="save-icon">save</mat-icon>
+      </button>
+      <button class="btn-row-clear"
+              mat-button
+              type="button"
+              (click)="clearCardTitle(card)">
+        <mat-icon class="clear-icon">clear</mat-icon>
+      </button>
+    </div>
+  </mat-card>
+</form>
+<div class="add-card">
+  <p class="btn-add"
+     (click)="createCard()">
+    add card
+  </p>
+</div>

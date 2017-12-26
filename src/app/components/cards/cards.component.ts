@@ -20,107 +20,72 @@ export class CardsComponent implements OnInit {
   numberOfCards = [];
   hideGhostCard: boolean = true;
 
-  options: SortablejsOptions = {
-    group: 'cards',
-    draggable: ".item",
-    animation: 150,
-    onEnd: (evt) => {
-      console.log('onEnd', evt)
-      let idColumnFrom = evt.from.id;
-      let idColumnTo = evt.to.id;
-      /*  let values = []
+  /*  options: SortablejsOptions = {
+   group: 'cards',
+   draggable: ".item",
+   animation: 150,
+   onEnd: (evt) => {
+   console.log('onEnd', evt)
+   let idColumnFrom = evt.from.id;
+   let idColumnTo = evt.to.id;
+   /!*  let values = []
 
-       let arrOfCardPositionsTakenColumn = evt.path//[1].children;
-       for (const key in arrOfCardPositionsTakenColumn) {
-       /!*       let keyNumber = parseInt(key)
-       if(typeof(keyNumber)== "number")  *!/   values.push(key)
-       }
-       console.log(`ArrCards: `, arrOfCardPositionsTakenColumn);
-       let cardss = this.cards
-       let cardId = evt.item.dataset.id*/
-      /*if(cardId !== evt.to.children[1].dataset.id){
-       console.log('We Have Card in last position',evt.to.children[1].dataset.id)
-       var carsNewPositions = cardss.map((card,i,arr)=>{
-       if(card.id == cardId) {
-       card.position = 0
-       }  if(card.id !== cardId) {
-       card.position = card.position + 1}
-       return card
-       },[])
-       }*/
+   let arrOfCardPositionsTakenColumn = evt.path//[1].children;
+   for (const key in arrOfCardPositionsTakenColumn) {
+   /!*       let keyNumber = parseInt(key)
+   if(typeof(keyNumber)== "number")  *!/   values.push(key)
+   }
+   console.log(`ArrCards: `, arrOfCardPositionsTakenColumn);
+   let cardss = this.cards
+   let cardId = evt.item.dataset.id*!/
+   /!*if(cardId !== evt.to.children[1].dataset.id){
+   console.log('We Have Card in last position',evt.to.children[1].dataset.id)
+   var carsNewPositions = cardss.map((card,i,arr)=>{
+   if(card.id == cardId) {
+   card.position = 0
+   }  if(card.id !== cardId) {
+   card.position = card.position + 1}
+   return card
+   },[])
+   }*!/
 
-      if (evt.to.id !== evt.from.id) {
-        this.cardForDelete = {
-          id: evt.from.dataset.id,
-          title: evt.from.dataset.title,
-          description: evt.from.dataset.description,
-          date: new Date(2017, 11, 16),
-          columnId: idColumnFrom,
-          position: parseInt(evt.from.dataset.position)
-        }
+   if (evt.to.id !== evt.from.id) {
+   this.cardForDelete = {
+   id: evt.from.dataset.id,
+   title: evt.from.dataset.title,
+   description: evt.from.dataset.description,
+   date: new Date(2017, 11, 16),
+   columnId: idColumnFrom,
+   position: parseInt(evt.from.dataset.position)
+   }
 
-        this.draggedCard = {
-          id: evt.from.dataset.id,
-          title: evt.from.dataset.title,
-          description: evt.from.dataset.description,
-          date: new Date(2017, 11, 16),
-          columnId: idColumnTo,
-          position: parseInt(evt.from.dataset.position)
-        }
-        console.log(`cardForDelete: `, this.cardForDelete);
-        console.log(`this.draggedCard: `, this.draggedCard);
-        console.log(`idColumnTo: `, idColumnTo);
-        console.log(`idColumnFrom: `, idColumnFrom);
+   this.draggedCard = {
+   id: evt.from.dataset.id,
+   title: evt.from.dataset.title,
+   description: evt.from.dataset.description,
+   date: new Date(2017, 11, 16),
+   columnId: idColumnTo,
+   position: parseInt(evt.from.dataset.position)
+   }
+   console.log(`cardForDelete: `, this.cardForDelete);
+   console.log(`this.draggedCard: `, this.draggedCard);
+   console.log(`idColumnTo: `, idColumnTo);
+   console.log(`idColumnFrom: `, idColumnFrom);
 
-        if (this.cardForDelete.columnId !== this.draggedCard.columnId) {
-          this.cardService.getCurrentCard(this.draggedCard, this.cardForDelete)
-        }
-      }
-    }
-  };
+   if (this.cardForDelete.columnId !== this.draggedCard.columnId) {
+   this.cardService.getCurrentCard(this.draggedCard, this.cardForDelete)
+   }
+   }
+   }
+   };*/
 
   constructor(private cardService: CardService,
               private formBuilder: FormBuilder,
               private dragulaService: DragulaService) {
 
-    /*        dragulaService.drag.subscribe((value) => {
-     this.onDrag(value.slice(1));
-     });
-     dragulaService.drop.subscribe((value) => {
-     this.onDrop(value);
-     });*/
-
-
   }
 
-  /*
-   private onDrag(args) {
-   }
-
-   private onDrop(args) {
-   /!*let idCard: string = args[0].children[0].id;
-   let anotherIdColumn: string = args[1].id;
-   this.draggedCard = this.cards.find(card => card.id === idCard);
-
-   this.numberOfCards.push(this.draggedCard)
-
-   /!*
-   console.log(`onDrop: `, args);
-   console.log(`draggedCard: `, draggedCard);
-   console.log(`CardNew: `, anotherIdColumn);
-   *!/
-
-   if (this.draggedCard && anotherIdColumn && this.draggedCard.columnId !== anotherIdColumn) {
-
-   this.cardService.getCurrentCard(this.draggedCard, anotherIdColumn)
-   }*!/
-
-   console.log('args',args)
-
-   }*/
-
   ngOnInit() {
-
     this.titleForm = this.formBuilder.group({
       title: ['',
         [
@@ -139,6 +104,20 @@ export class CardsComponent implements OnInit {
 
   }
 
+  onMove(card: Card, cards: Card[], position: number, columnId) {
+    let dragCardColumnId = card.columnId
+    console.log(card);
+    console.log(position);
+    console.log(cards);
+
+  // let cardFromAnotherColumn = cards.find(card => card.columnId !== dragCardColumnId);
+   // console.log(cardFromAnotherColumn)
+    if ( columnId !== dragCardColumnId) {
+      console.log('cardForDelete',card );
+      console.log('columnId', columnId);
+       this.cardService.getCurrentCard(card,  columnId, position)
+    }
+  }
 
   createCard() {
     this.newCard = true;

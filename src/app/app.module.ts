@@ -31,6 +31,7 @@ import {AlertConfirmDeleting} from "./components/modal/alert-confirm/alert-confi
 import {CardDialog} from "./components/modal/card-dialog/card-dialog";
 import {TodoFormComponent} from "./components/todos/todo-form/todo-form.component";
 import {firebaseConfig} from "./firebase-config";
+import { DndModule } from 'ng2-dnd';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import {firebaseConfig} from "./firebase-config";
     FormsModule,
     SortablejsModule.forRoot({animation: 150}),
     DragulaModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DndModule.forRoot()
   ],
   providers: [
     UserService,
