@@ -20,69 +20,53 @@ export class CardsComponent implements OnInit {
   numberOfCards = [];
   hideGhostCard: boolean = true;
 
-  /*  options: SortablejsOptions = {
-   group: 'cards',
-   draggable: ".item",
-   animation: 150,
-   onEnd: (evt) => {
-   console.log('onEnd', evt)
-   let idColumnFrom = evt.from.id;
-   let idColumnTo = evt.to.id;
-   /!*  let values = []
+  options: SortablejsOptions = {
+    group: 'cards',
+    draggable: ".item",
+    animation: 150,
+    onEnd: (evt) => {
+      console.log('onEnd', evt)
+      let idColumnFrom = evt.from.id;
+      let idColumnTo = evt.to.id;
+      let cardss = evt.to.dataset.cards;
+      console.log(`Cards: `, JSON.parse(cardss))
+      console.log(`Cards: `, this.cards)
 
-   let arrOfCardPositionsTakenColumn = evt.path//[1].children;
-   for (const key in arrOfCardPositionsTakenColumn) {
-   /!*       let keyNumber = parseInt(key)
-   if(typeof(keyNumber)== "number")  *!/   values.push(key)
-   }
-   console.log(`ArrCards: `, arrOfCardPositionsTakenColumn);
-   let cardss = this.cards
-   let cardId = evt.item.dataset.id*!/
-   /!*if(cardId !== evt.to.children[1].dataset.id){
-   console.log('We Have Card in last position',evt.to.children[1].dataset.id)
-   var carsNewPositions = cardss.map((card,i,arr)=>{
-   if(card.id == cardId) {
-   card.position = 0
-   }  if(card.id !== cardId) {
-   card.position = card.position + 1}
-   return card
-   },[])
-   }*!/
+      if (evt.to.id !== evt.from.id) {
+        this.cardForDelete = {
+          id: evt.from.dataset.id,
+          title: evt.from.dataset.title,
+          description: evt.from.dataset.description,
+          columnId: idColumnFrom,
+          position: parseInt(evt.from.dataset.position)
+        }
 
-   if (evt.to.id !== evt.from.id) {
-   this.cardForDelete = {
-   id: evt.from.dataset.id,
-   title: evt.from.dataset.title,
-   description: evt.from.dataset.description,
-   date: new Date(2017, 11, 16),
-   columnId: idColumnFrom,
-   position: parseInt(evt.from.dataset.position)
-   }
+        this.draggedCard = {
+          id: evt.from.dataset.id,
+          title: evt.from.dataset.title,
+          description: evt.from.dataset.description,
+          columnId: idColumnTo,
+          position: parseInt(evt.from.dataset.position)
+        }
+        /*console.log(`cardForDelete: `, this.cardForDelete);
+         console.log(`this.draggedCard: `, this.draggedCard);
+         console.log(`idColumnTo: `, idColumnTo);
+         console.log(`idColumnFrom: `, idColumnFrom);*/
 
-   this.draggedCard = {
-   id: evt.from.dataset.id,
-   title: evt.from.dataset.title,
-   description: evt.from.dataset.description,
-   date: new Date(2017, 11, 16),
-   columnId: idColumnTo,
-   position: parseInt(evt.from.dataset.position)
-   }
-   console.log(`cardForDelete: `, this.cardForDelete);
-   console.log(`this.draggedCard: `, this.draggedCard);
-   console.log(`idColumnTo: `, idColumnTo);
-   console.log(`idColumnFrom: `, idColumnFrom);
 
-   if (this.cardForDelete.columnId !== this.draggedCard.columnId) {
-   this.cardService.getCurrentCard(this.draggedCard, this.cardForDelete)
-   }
-   }
-   }
-   };*/
+        if (this.cardForDelete.columnId !== this.draggedCard.columnId) {
+          this.cardService.getCurrentCard(this.cardForDelete, this.draggedCard)
+        }
+      }
+    }
+  };
 
   constructor(private cardService: CardService,
               private formBuilder: FormBuilder,
               private dragulaService: DragulaService) {
-
+    /*    this.cards.valueChanges.subscribe(() => {
+     console.log(this.cards.value);
+     });*/
   }
 
   ngOnInit() {
@@ -103,21 +87,66 @@ export class CardsComponent implements OnInit {
 
 
   }
+  @HostListener('drop', ['$event'])
+  onDrop($event) {
 
+  }
   onMove(card: Card, cards: Card[], position: number, columnId) {
+
     let dragCardColumnId = card.columnId
     console.log(card);
     console.log(position);
     console.log(cards);
 
-  // let cardFromAnotherColumn = cards.find(card => card.columnId !== dragCardColumnId);
-   // console.log(cardFromAnotherColumn)
-    if ( columnId !== dragCardColumnId) {
-      console.log('cardForDelete',card );
+    // let cardFromAnotherColumn = cards.find(card => card.columnId !== dragCardColumnId);
+    // console.log(cardFromAnotherColumn)
+    if (columnId !== dragCardColumnId) {
+      console.log('cardForDelete', card);
       console.log('columnId', columnId);
-       this.cardService.getCurrentCard(card,  columnId, position)
+      let draggedCardFromAnotherColumn = {
+        id: card.id,
+        title: card.title,
+        description: card.description,
+        columnId: columnId,
+        position: position
+      }
+      console.log(draggedCardFromAnotherColumn)
+
+      let index = cards.findIndex((card1) => {
+        return card1.id === card.id;
+      })
+      console.log(index)
+
+      cards[index].columnId = columnId
+
+      let orderedCards = cards.map((orderedCard, i) => {
+        orderedCard.position = i;
+        return orderedCard;
+      }, []);
+      console.log(orderedCards)
+
+      orderedCards.forEach((card) => {
+        console.log(card);
+        this.cardService.changeCardTitle(card)
+      });
+      //this.cardService.deleteCard(card)
+
+
+    } else {
+      let orderedCards = cards.map((orderedCard, i) => {
+        orderedCard.position = i;
+        return orderedCard;
+      }, []);
+      console.log(orderedCards)
+
+      orderedCards.forEach((card) => {
+        console.log(card);
+        this.cardService.changeCardTitle(card)
+      });
     }
   }
+
+
 
   createCard() {
     this.newCard = true;

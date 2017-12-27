@@ -3,6 +3,5 @@ export interface Card {
   title?: string
   id?: string,
   position: number;
-  date?:Date,
   description: string
 }

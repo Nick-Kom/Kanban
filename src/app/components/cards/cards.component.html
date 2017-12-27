@@ -1,18 +1,38 @@
 <div
-  class="bag"
-  dnd-sortable-container [sortableData]="cards">
+  class="cards-container"
+  [class.active]="newCard"
+  dnd-sortable-container [sortableData]="cards"
+>
 
-    <card-item
-      class="card-item"
-      *ngFor=" let card of cards; let i = index"
-      dnd-sortable
-      [sortableIndex]="i"
-      [dragEnabled]="true"
-      [dragData]="card"
-      dnd-droppable
-      (onDropSuccess)="onMove($event, cards, i, columnId)"
-      [card]="card">
-    </card-item>
+
+  <!--
+  [sortablejs]="cards"   [sortablejsOptions]="options"
+  [id]="columnId"
+  [attr.data-title]="card.title"
+  [attr.data-id]="card.id"
+  [attr.data-position]="card.position"
+  [attr.data-description]="card.description"
+  [attr.data-columnid]="card.columnId"
+  [attr.data-cards]="cards | json"
+
+  [sortablejs]="cards"   [sortablejsOptions]="options"
+
+    <div *ngIf="hideGhostCard"
+       [id]="columnId"
+       [sortablejs]=" cards"
+       [sortablejsOptions]="options" class="ghost-card">
+  </div>
+
+  -->
+  <card-item class="card-item"
+             *ngFor=" let card of cards; let i = index"
+             dnd-sortable
+             [sortableIndex]="i"
+             [dragData]="card"
+             (onDropSuccess)="onMove($event, cards, i, columnId)"
+             [card]="card" >
+  </card-item>
+
 
 </div>
 <form *ngIf="newCard"

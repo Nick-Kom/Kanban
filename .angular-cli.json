@@ -20,8 +20,7 @@
       "prefix": "app",
       "styles": [
         "styles.css",
-        "../node_modules/bootstrap/dist/css/bootstrap.css",
-        "../node_modules/ng2-dnd/bundles/style.css"
+        "../node_modules/bootstrap/dist/css/bootstrap.css"
 
       ],
       "scripts": [],

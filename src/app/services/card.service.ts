@@ -50,40 +50,10 @@ export class CardService {
     return this.cards
   }
 
-  getCardChangetPosition(card: Card) {
-
-    this.changePositionCard = card.date
-    this.changePositionCardId = card.id
-    //this.cardsCollection.doc(`${this.cardId}`).set(card)
-  }
-
-  numberOfCards(cards: any) {
-    this.arrOfCards = cards
-  }
-
-  numberOfCardsCoosen() {
-    this.arrOfCardsCoosen = true
-    console.log('arrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrOfCardsCCCCCCHHHHH', this.arrOfCardsCoosen)
-  }
-
-  getDraggedCard(card:Card) {
-
-  }
-
-
-  getCurrentCard(card: Card, columnId: string, position: number) {
+  getCurrentCard(card: Card,draggedCard: Card) {
    this.deleteCard(card)
-      let draggedCard = {
-        id: card.id,
-        title: card.title,
-        description: card.description,
-        columnId: columnId,
-        position: position
-      }
+
    this.addCard(draggedCard)
-
-
-
   }
 
   getColumnId(columnId: string) {

@@ -9,7 +9,6 @@ import {CardDialog} from "../../modal/card-dialog/card-dialog";
 import {DragulaService} from "ng2-dragula";
 
 
-
 @Component({
   selector: 'card-item',
   templateUrl: 'card-item.template.html',
@@ -17,22 +16,24 @@ import {DragulaService} from "ng2-dragula";
 })
 export class CardItemComponent {
   @Input() card: Card;
- // @Output() onDeleteCard = new EventEmitter;
+  // @Output() onDeleteCard = new EventEmitter;
   cardTitle: boolean = false;
   cardDescription: boolean = false;
   cardDatesTimes: boolean = false;
-  titleForm : FormGroup;
+  titleForm: FormGroup;
   descriptionForm: FormGroup;
   animal: string;
   name: string;
   draggedCard: Card;
-
+  dragBackground: boolean = false
 
   constructor(private cardService: CardService,
               private dialog: MatDialog,
               private formBuilder: FormBuilder) {
 
   }
+
+
 
   ngOnInit() {
     this.titleForm = this.formBuilder.group({
@@ -50,12 +51,11 @@ export class CardItemComponent {
     });
   }
 
-/*getCurrentId(card:Card){
-    console.log('CUrrent Card',card)
-    //this.cardService.getDraggedCard(card)
-  }*/
 
+  onDrag(event:any){
 
+  //  this.dragBackground = true
+  }
   changeCardTitle() {
     this.cardTitle = true;
   }
@@ -64,10 +64,9 @@ export class CardItemComponent {
     this.cardDescription = true;
   }
 
-  saveCardTitle(cardFormGroup:any) {
-    let card: Card  = {
+  saveCardTitle(cardFormGroup: any) {
+    let card: Card = {
       id: this.card.id,
-      date: this.card.date,
       position: this.card.position,
       columnId: this.card.columnId,
       title: cardFormGroup.title,
@@ -78,10 +77,9 @@ export class CardItemComponent {
   }
 
   saveCardDescription() {
-    let card: Card  = {
+    let card: Card = {
       id: this.card.id,
       position: this.card.position,
-      date: this.card.date,
       columnId: this.card.columnId,
       title: this.card.title,
       description: this.titleForm.value.description
@@ -99,27 +97,21 @@ export class CardItemComponent {
   }
 
 
-
-
-
   openDialog(): void {
     let dialogRef = this.dialog.open(CardDialog, {
       width: '450px',
-      data: {  title: this.card.title, card: this.card, description: this.card.description }
+      data: {title: this.card.title, card: this.card, description: this.card.description}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      if (result){
+      if (result) {
         this.saveCardTitle(result)
       }
 
 
     });
   }
-
-
-
 
 
 }

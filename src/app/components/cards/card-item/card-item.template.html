@@ -1,5 +1,10 @@
 <mat-card
+  [id]="card.columnId"
+  [attr.data-id]="card.id"
   (click)="openDialog()"
-  class="mdcard-style item">
-  <p class="card-name ">{{card.title}}</p>
+  dnd-draggable
+  (drag) = "onDrag($event)"
+
+  class="mdcard-style item" [class.drag-background]="dragBackground">
+  <p class="card-name " >{{card.title}}</p>
 </mat-card>
