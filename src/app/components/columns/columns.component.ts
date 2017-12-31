@@ -1,12 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {ColumnService} from "../../services/column.service";
-import {AngularFireAuth} from "angularfire2/auth";
-import {AngularFirestore} from "angularfire2/firestore";
-import {Observable, Subscription} from "rxjs";
+import {Component} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
+import {ColumnService} from "../../services/column.service";
 import {Column} from "./column";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {SortablejsOptions} from "angular-sortablejs";
 
 @Component({
   selector: 'app-columns',
@@ -15,12 +11,9 @@ import {SortablejsOptions} from "angular-sortablejs";
 })
 export class ColumnsComponent {
   columns: any;
-  columnsObserv: any;
-  subscription: Subscription;
   boardId: any;
   newColumn: boolean = false;
   titleForm: FormGroup ;
-
 
   constructor(private route: ActivatedRoute,
               private columnService: ColumnService,
@@ -69,14 +62,11 @@ export class ColumnsComponent {
       title: this.titleForm.value.title
     }
     this.columnService.addColumn(column)
-
     this.newColumn = false;
   }
 
   clearCardTitle() {
     this.newColumn = false;
   }
-
-
 
 }

@@ -1,0 +1,28 @@
+.board-item{
+  margin: 10px;
+  width: 300px;
+  text-align: center;
+  font-size: 25px;
+  &-title{
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.btn-row {
+  float: right;
+  margin-top: 15px;
+
+  &-save, &-clear {
+    min-width: 0;
+    padding: 0 1px 0 1px;
+  }
+  .save-icon {
+    color: #28a400;
+  }
+  .clear-icon {
+    color: #c7d3dd;
+  }
+}

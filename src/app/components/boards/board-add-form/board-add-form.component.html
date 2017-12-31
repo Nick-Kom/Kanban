@@ -1,0 +1,37 @@
+<mat-card class="board-item" *ngIf="newBoard">
+  <form
+    (ngSubmit)="createBoard(); titleForm.reset()"
+    [formGroup]="titleForm">
+    <div class="row justify-content-between">
+      <div class="col col-9 col-md-6 col-lg-8 ">
+        <mat-input-container>
+          <input class="board-title-input"
+                 matInput
+                 placeholder="Board title"
+                 formControlName="title">
+        </mat-input-container>
+      </div>
+      <div class="col col-3 col-md-6 col-lg-4 ">
+        <div class="btn-row">
+          <button class="btn-row-save"
+                  mat-button
+                  [disabled]="titleForm.invalid">
+            <mat-icon class="save-icon">save</mat-icon>
+          </button>
+          <button class="btn-row-clear"
+                  mat-button
+                  (click)="hideBoardTitle(); titleForm.reset()">
+            <mat-icon class="clear-icon">clear</mat-icon>
+          </button>
+        </div>
+      </div>
+      <div>
+        <mat-card class="alert"
+                  *ngIf="!titleForm.controls['title'].valid
+                        && titleForm.controls['title'].touched">
+          You must specify title by 40 characters
+        </mat-card>
+      </div>
+    </div>
+  </form>
+</mat-card>

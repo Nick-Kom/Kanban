@@ -1,13 +1,12 @@
 import {Component, OnInit} from '@angular/core';
+import {MatDialog} from "@angular/material";
 import {ActivatedRoute, Router} from "@angular/router";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ColumnService} from "../../../services/column.service";
 import {BoardsService} from "../../../services/boards.service";
 import {Board} from "./board";
 import {CardService} from "../../../services/card.service";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Subscription} from "rxjs";
 import {AlertConfirmDeleting} from "../../modal/alert-confirm/alert-confirm-deleting";
-import {MatDialog} from "@angular/material";
 
 @Component({
   selector: 'app-board',
@@ -28,13 +27,12 @@ export class BoardComponent implements OnInit {
               private formBuilder: FormBuilder,
               private columnService: ColumnService,
               private cardService: CardService,
-              private dialog : MatDialog,
+              private dialog: MatDialog,
               private boardsService: BoardsService) {
 
   }
 
   ngOnInit() {
-
     this.route.params
       .subscribe((params) => {
         this.boardId = params.id
@@ -43,7 +41,7 @@ export class BoardComponent implements OnInit {
         this.boardsService.boardIdDD(params.id);
       });
 
-    console.log('BBBoarddd', this.boardName)
+    console.log('Board', this.boardName)
 
     this.boardsService.getUserBoards().subscribe(
       boards => {
@@ -67,13 +65,12 @@ export class BoardComponent implements OnInit {
     this.changeTitle = false;
   }
 
-  saveBoardTitle(date:Date) {
-    this.boardsService.changeBoardTitle(this.boardId,date, this.titleForm.value.title)
+  saveBoardTitle(date: Date) {
+    this.boardsService.changeBoardTitle(this.boardId, date, this.titleForm.value.title)
     this.changeTitle = true;
   }
 
   getCurrentBoard(board: Board) {
-    //this.boardsService.getCurrentBoard(board);
     if (board) {
       this.boardName = board.title;
       this.boardDate = board.date;
@@ -98,7 +95,6 @@ export class BoardComponent implements OnInit {
         this.router.navigate(['/boards']);
       }
     })
-
   }
 
 }

@@ -6,84 +6,24 @@
 
 <!-- User logged in -->
 <ng-template #authenticated>
-  <!--  <div *ngIf="user | async as user">
-      <h3>Howdy, {{ user.displayName }}</h3>
-      <app-items></app-items>
-      <img *ngIf="user.photoURL"  [src]="user.photoURL">
-      <p>user id : {{user.uid}}</p>
-      <div>
-        <button (click)="onSubmit()">Board Add Button</button>
-      </div>
-      <div *ngFor="let board of boards">
-        <div (click)="openBoard(board )">{{board.title}}</div>
-        <button mat-button (click)="deleteBoard(board)" class="btn red">Delete</button>
-      </div>
-    </div>-->
-
   <div class="container-fluid boards-container">
     <div>
       <button class="btn-add"
               mat-mini-fab
+              [disabled]="newBoard"
               matTooltip="Add Board"
-              (click)="createBoard()">
+              (click)="showCreateBoard()">
         <mat-icon class="btn-add-icon">add</mat-icon>
       </button>
     </div>
     <div class="row justify-content-md-center">
-      <div *ngFor="let board of boards">
-        <mat-card class="board-item">
-          <form *ngIf="board.title == ''"
-            (ngSubmit)="saveBoardTitle(board)"
-            [formGroup]="titleForm">
-
-            <div class="row justify-content-between">
-              <div class="col col-9 col-md-6 col-lg-8 ">
-                <mat-input-container >
-                  <input class="board-title-input"
-                         matInput
-                         placeholder="Board title"
-                         formControlName="title">
-                </mat-input-container>
-              </div>
-              <div class="col col-3 col-md-6 col-lg-4 ">
-                <div class="board-title-button">
-                  <button
-                          mat-button
-                          [disabled]="titleForm.invalid">
-                    <mat-icon class="save-icon">save</mat-icon>
-                  </button>
-                </div>
-              </div>
-              <div  >
-                <mat-card class="alert" *ngIf="!titleForm.controls['title'].valid
-                        && titleForm.controls['title'].touched">
-                  You must specify title by 40 characters
-                </mat-card>
-              </div>
-            </div>
-          </form>
-
-          <div class="row" *ngIf=" board.title">
-            <div class=" col-10 board-item-title"
-                 matTooltip="{{board.title}}"
-                 (click)="openBoard(board )">
-              {{board.title}}
-            </div>
-            <button mat-icon-button [matMenuTriggerFor]="menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <div class="col-2">
-              <mat-menu #menu="matMenu">
-                <button mat-menu-item
-                        (click)="openDialog(board)">
-                  <mat-icon>delete</mat-icon>
-                  <span>Delete</span>
-                </button>
-              </mat-menu>
-            </div>
-          </div>
-        </mat-card>
-      </div>
+      <board-item *ngFor="let board of boards"
+                  [board]="board">
+      </board-item>
+      <board-add-form [newBoard]="newBoard"
+                      (newBoardChange)="hideBoardTitle($event)"
+                      (newBoardChange)="createBoard($event)">
+      </board-add-form>
     </div>
   </div>
 </ng-template>

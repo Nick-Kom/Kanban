@@ -32,6 +32,8 @@ import {CardDialog} from "./components/modal/card-dialog/card-dialog";
 import {TodoFormComponent} from "./components/todos/todo-form/todo-form.component";
 import {firebaseConfig} from "./firebase-config";
 import { DndModule } from 'ng2-dnd';
+import { BoardAddFormComponent } from './components/boards/board-add-form/board-add-form.component';
+import { BoardItemComponent } from './components/boards/board-item/board-item.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,9 @@ import { DndModule } from 'ng2-dnd';
     FileDropDirective,
     AlertConfirmDeleting,
     CardDialog,
-    TodoFormComponent
+    TodoFormComponent,
+    BoardAddFormComponent,
+    BoardItemComponent
   ],
   entryComponents: [AlertConfirmDeleting, CardDialog],
   imports: [

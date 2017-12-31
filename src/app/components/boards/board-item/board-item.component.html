@@ -1,0 +1,60 @@
+<mat-card class="board-item">
+  <form *ngIf="showEditBoardTitle"
+        (ngSubmit)="saveEditedBoardTitle(board); titleForm.reset()"
+        [formGroup]="titleForm">
+    <div class="row justify-content-between">
+      <div class="col col-9 col-md-6 col-lg-8 ">
+        <mat-input-container>
+          <input class="board-title-input"
+                 matInput
+                 placeholder="Board title"
+                 formControlName="title">
+        </mat-input-container>
+      </div>
+      <div class="col col-3 col-md-6 col-lg-4 ">
+        <div class="btn-row">
+          <button class="btn-row-save"
+                  mat-button
+                  [disabled]="titleForm.invalid">
+            <mat-icon class="save-icon">save</mat-icon>
+          </button>
+          <button class="btn-row-clear"
+                  mat-button
+                  (click)="hideChangingBoardTitle()">
+            <mat-icon class="clear-icon">clear</mat-icon>
+          </button>
+        </div>
+      </div>
+      <mat-card class="alert" *ngIf="!titleForm.controls['title'].valid
+                        && titleForm.controls['title'].touched">
+        You must specify title by 40 characters
+      </mat-card>
+    </div>
+  </form>
+
+  <div class="row" *ngIf="!showEditBoardTitle">
+    <div class=" col-10 board-item-title"
+         matTooltip="{{board.title}}"
+         (click)="openBoard(board )">
+      {{board.title}}
+    </div>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <div class="col-2">
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item
+                type="button"
+                (click)="editBoardTitle()">
+          <mat-icon>create</mat-icon>
+          <span>Rename</span>
+        </button>
+        <button mat-menu-item
+                (click)="openDialog(board)">
+          <mat-icon>delete</mat-icon>
+          <span>Delete</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+</mat-card>

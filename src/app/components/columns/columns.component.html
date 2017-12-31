@@ -1,17 +1,3 @@
-<!--<div mdTooltip="Add new board">
-  <button class="btn-add"
-          mat-mini-fab
-          (click)="createColumn()">
-    <mat-icon class="btn-add-icon">add</mat-icon>
-  </button>
-</div>
-<div class="columns">
-  <column-item
-    [column]="column"
-    *ngFor="let column of columns">
-  </column-item>
-</div>-->
-
 <div class="column-scrol container">
 <div class=" columns-space">
   <column-item
@@ -53,6 +39,7 @@
       <button class="btn-add"
               mat-mini-fab
               type="button"
+              [disabled]="newColumn"
               (click)="showCreateColumn()">
         <mat-icon class="btn-add-icon">add</mat-icon>
       </button>
