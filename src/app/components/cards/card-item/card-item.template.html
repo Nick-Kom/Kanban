@@ -6,5 +6,14 @@
   (drag) = "onDrag($event)"
 
   class="mdcard-style item" [class.drag-background]="dragBackground">
-  <p class="card-name " >{{card.title}}</p>
+  <p class="card-name">{{card.title}}</p>
+
+<div class="card-infoo">
+  <mat-icon class="description-info" *ngIf="card.description !== '' ">subject</mat-icon>
+  <div class="checklist-info" *ngIf="todosLength >0">
+    <mat-icon class="checked-icon">check_box</mat-icon>
+    <span>{{completedTodos.length}}/{{ todos.length}}</span>
+  </div>
+</div>
+
 </mat-card>

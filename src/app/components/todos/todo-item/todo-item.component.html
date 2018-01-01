@@ -1,0 +1,21 @@
+<div class="todo-item ">
+    <div class="row  ">
+        <div class="col-2   checkbox">
+            <mat-checkbox
+                    (click)="onToggle()"
+                    [(ngModel)]="todo.completed">
+
+            </mat-checkbox>
+        </div>
+        <div class="col-6 title">
+            <p  [class.checklist-item-crossed]="todo.completed == true" > {{todo.title}}</p>
+        </div>
+        <div class="col delete-col">
+            <button class="btn-delete"
+                    mat-button (click)="onDelete()">
+                <mat-icon class="delete-icon">delete</mat-icon>
+            </button>
+        </div>
+    </div>
+</div>
+

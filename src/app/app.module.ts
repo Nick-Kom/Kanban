@@ -29,11 +29,11 @@ import {DragulaModule} from "ng2-dragula";
 import {FileDropDirective} from "./components/columns/column-item/file-drop.directive";
 import {AlertConfirmDeleting} from "./components/modal/alert-confirm/alert-confirm-deleting";
 import {CardDialog} from "./components/modal/card-dialog/card-dialog";
-import {TodoFormComponent} from "./components/todos/todo-form/todo-form.component";
 import {firebaseConfig} from "./firebase-config";
 import { DndModule } from 'ng2-dnd';
 import { BoardAddFormComponent } from './components/boards/board-add-form/board-add-form.component';
 import { BoardItemComponent } from './components/boards/board-item/board-item.component';
+import {TodoModule} from "./components/todos/todo.module";
 
 @NgModule({
   declarations: [
@@ -51,7 +51,6 @@ import { BoardItemComponent } from './components/boards/board-item/board-item.co
     FileDropDirective,
     AlertConfirmDeleting,
     CardDialog,
-    TodoFormComponent,
     BoardAddFormComponent,
     BoardItemComponent
   ],
@@ -69,7 +68,8 @@ import { BoardItemComponent } from './components/boards/board-item/board-item.co
     SortablejsModule.forRoot({animation: 150}),
     DragulaModule,
     ReactiveFormsModule,
-    DndModule.forRoot()
+    DndModule.forRoot(),
+    TodoModule
   ],
   providers: [
     UserService,

@@ -43,6 +43,8 @@
       </mat-card>
     </div>
   </form>
+
+  <todo [card]="data.card"></todo>
 </div>
 <div mat-dialog-actions>
   <button mat-raised-button color="warn" (click)="openDialog()">Delete</button>

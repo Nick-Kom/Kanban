@@ -7,6 +7,8 @@ import {MatDialog} from "@angular/material";
 import {AlertConfirmDeleting} from "../../modal/alert-confirm/alert-confirm-deleting";
 import {CardDialog} from "../../modal/card-dialog/card-dialog";
 import {DragulaService} from "ng2-dragula";
+import {TodoService} from "../../todos/todo.service";
+import {Todo} from "../../todos/todo";
 
 
 @Component({
@@ -24,10 +26,13 @@ export class CardItemComponent {
   descriptionForm: FormGroup;
   animal: string;
   name: string;
+  todosLength: number;
   draggedCard: Card;
   dragBackground: boolean = false
-
+  todos:Todo[];
+  completedTodos:Todo[];
   constructor(private cardService: CardService,
+              private todoService: TodoService,
               private dialog: MatDialog,
               private formBuilder: FormBuilder) {
 
@@ -49,6 +54,13 @@ export class CardItemComponent {
           Validators.maxLength(500)
         ]]
     });
+
+    this.todoService.getTodos().subscribe((todos: Todo[]) => {
+      this.todos = todos.filter(todo => todo.cardId == this.card.id);
+      this.todosLength = this.todos.length
+      this.completedTodos = this.todos.filter(todo => todo.completed === true);
+    });
+
   }
 
 

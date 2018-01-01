@@ -7,6 +7,7 @@ import {BoardsService} from "../../../services/boards.service";
 import {Board} from "./board";
 import {CardService} from "../../../services/card.service";
 import {AlertConfirmDeleting} from "../../modal/alert-confirm/alert-confirm-deleting";
+import {TodoService} from "../../todos/todo.service";
 
 @Component({
   selector: 'app-board',
@@ -26,6 +27,7 @@ export class BoardComponent implements OnInit {
               private router: Router,
               private formBuilder: FormBuilder,
               private columnService: ColumnService,
+              private todoService: TodoService,
               private cardService: CardService,
               private dialog: MatDialog,
               private boardsService: BoardsService) {
@@ -38,6 +40,7 @@ export class BoardComponent implements OnInit {
         this.boardId = params.id
         this.columnService.getId(params.id);
         this.cardService.getBoardId(params.id);
+        this.todoService.getBoardId(params.id);
         this.boardsService.boardIdDD(params.id);
       });
 
