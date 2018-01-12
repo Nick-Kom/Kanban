@@ -12,6 +12,9 @@ import {UserService} from "../../services/user.service";
 export class SignupComponent implements OnInit {
   state: string = '';
   error: any;
+  email:string;
+  password:string;
+  nickname:string;
 
   constructor(public af: AngularFireAuth, private router: Router,
  private userService: UserService) {

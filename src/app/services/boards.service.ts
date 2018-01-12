@@ -74,12 +74,13 @@ export class BoardsService {
 
   }
 
-  changeBoardTitle(id: string,date, title: string) {
-    console.log('DDDDDDDDDDDDDDDDDDDDate',date)
+  changeBoardTitle(id: string, date, title: string) {
+    let changeSpaces =  title.replace(/\s{2,}/g, ' ')
+    console.log('changeSpaces',changeSpaces)
     let board: Board = {
       id: id,
       date: date,
-      title: title
+      title: changeSpaces
     }
     this.boardsCollection.doc(`${id}`).set(board)
   }

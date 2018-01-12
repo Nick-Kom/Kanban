@@ -19,6 +19,9 @@ interface User {
 })
 export class LoginComponent implements OnInit {
   error: any;
+  email :string;
+  nickname:string;
+  password:string;
 
   constructor(public afAuth: AngularFireAuth,
               public  afs: AngularFirestore,

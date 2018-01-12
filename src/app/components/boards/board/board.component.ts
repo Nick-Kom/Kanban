@@ -12,7 +12,7 @@ import {TodoService} from "../../todos/todo.service";
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
-  styleUrls: ['./board.component.less', '../../../styles/alert.less']
+  styleUrls: ['./board.component.less', './../../../styles/alert.less']
 })
 export class BoardComponent implements OnInit {
   board: any;
@@ -20,6 +20,7 @@ export class BoardComponent implements OnInit {
   boardId: any;
   boardName: string;
   changeTitle: boolean = true;
+  showCancelBtn: boolean = false;
   titleForm: FormGroup;
   boardDate: Date;
 
@@ -58,7 +59,7 @@ export class BoardComponent implements OnInit {
     this.titleForm = this.formBuilder.group({
       title: [this.boardName,
         [Validators.required,
-          Validators.maxLength(40)
+          Validators.maxLength(50)
         ]]
     });
 
@@ -66,6 +67,11 @@ export class BoardComponent implements OnInit {
 
   editBoardTitle() {
     this.changeTitle = false;
+    this.showCancelBtn = true;
+  }
+  shovEditBtn(){
+    this.changeTitle = true;
+    this.showCancelBtn = false;
   }
 
   saveBoardTitle(date: Date) {

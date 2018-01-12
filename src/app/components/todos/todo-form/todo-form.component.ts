@@ -19,8 +19,7 @@ export class TodoFormComponent {
         this.titleForm = this.formBuilder.group({
             title: ['',
                 [
-                    Validators.minLength(3),
-                    Validators.maxLength(40)
+                    Validators.maxLength(50)
                 ]]
         });
     }

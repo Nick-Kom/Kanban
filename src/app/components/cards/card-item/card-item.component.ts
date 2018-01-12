@@ -81,8 +81,8 @@ export class CardItemComponent {
       id: this.card.id,
       position: this.card.position,
       columnId: this.card.columnId,
-      title: cardFormGroup.title,
-      description: cardFormGroup.description
+      title: cardFormGroup.title.replace(/\s{2,}/g, ' '),
+      description: cardFormGroup.description.replace(/\s{2,}/g, ' ')
     };
     this.cardService.changeCardTitle(card)
     this.cardTitle = false;

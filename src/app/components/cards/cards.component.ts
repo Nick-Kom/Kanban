@@ -73,7 +73,7 @@ export class CardsComponent implements OnInit {
     this.titleForm = this.formBuilder.group({
       title: ['',
         [
-          Validators.maxLength(40)
+          Validators.maxLength(100)
         ]]
     });
 
@@ -164,11 +164,12 @@ export class CardsComponent implements OnInit {
     else {
       newPosition = 0
     }
+    let changeSpaces =  this.titleForm.value.title.replace(/\s{2,}/g, ' ')
     let card: Card = {
       columnId: this.columnId,
       position: newPosition,
-      title: this.titleForm.value.title,
-      description: ''
+      title: changeSpaces,
+      description: ' '
     }
     this.cardService.addCard(card)
 

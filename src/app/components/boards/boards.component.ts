@@ -6,7 +6,7 @@ import {Board} from "./board/board";
 @Component({
   selector: 'app-boards',
   templateUrl: './boards.component.html',
-  styleUrls: ['./boards.component.less', '../../styles/btn.less', '../../styles/alert.less']
+  styleUrls: ['./boards.component.less', '../../styles/btn.less']
 })
 export class BoardsComponent implements OnInit {
   user: any;

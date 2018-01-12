@@ -8,7 +8,7 @@ import {CardService} from "../../../services/card.service";
 @Component({
   selector: 'card-dialog',
   templateUrl: 'card-dialog.template.html',
-  styleUrls: ['card-dialog.less',  '../../../styles/alert.less']
+  styleUrls: ['card-dialog.less', '../../../styles/alert.less']
 })
 export class CardDialog {
   titleForm: FormGroup;
@@ -26,11 +26,10 @@ export class CardDialog {
     this.titleForm = this.formBuilder.group({
       title: [this.data.title ? this.data.title : '',
         [Validators.required,
-          Validators.maxLength(40)
+          Validators.maxLength(100)
         ]],
       description: [this.data.card ? this.data.card.description : '',
         [Validators.required,
-          Validators.minLength(10),
           Validators.maxLength(500)
         ]]
     });
@@ -49,7 +48,8 @@ export class CardDialog {
   onNoClick(): void {
     this.dialogRef.close();
   }
-  deleteCard(card:Card){
+
+  deleteCard(card: Card) {
     this.cardService.deleteCard(card)
     this.dialogRef.close();
   }

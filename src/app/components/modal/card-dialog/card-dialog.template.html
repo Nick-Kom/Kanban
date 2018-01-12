@@ -7,7 +7,7 @@
     <p>{{data.card.title}}</p>
   </div>
 
-  <div *ngIf="!cardTitle || !data.card.description && !data.card.description==''"
+  <div *ngIf="!cardTitle || !data.card.description && data.card.description !=='' "
        class="change-title-description"
        (click)="changeCardDescription()">
     <p class="title">DESCRIPTION</p>
@@ -26,7 +26,7 @@
       </mat-input-container>
       <mat-card class="alert" *ngIf="!titleForm.controls['title'].valid
                         && titleForm.controls['title'].touched">
-        You must specify title by 40 characters
+        You must specify title in 100 characters
       </mat-card>
       <mat-input-container class=" text-full-width">
                             <textarea matInput
@@ -37,9 +37,8 @@
                             </textarea>
       </mat-input-container>
       <mat-card class="alert"
-                *ngIf="!titleForm.controls['description'].valid
-                                     && titleForm.controls['description'].touched">
-        You must specify description between 10 and 500 characters
+                *ngIf="!titleForm.controls['description'].valid ">
+        You must specify description in 500 characters
       </mat-card>
     </div>
   </form>
@@ -49,5 +48,5 @@
 <div mat-dialog-actions>
   <button mat-raised-button color="warn" (click)="openDialog()">Delete</button>
   <span class="example-spacer"></span>
-  <button mat-raised-button [mat-dialog-close]="titleForm.value" tabindex="2">Save</button>
+  <button mat-raised-button [mat-dialog-close]="titleForm.value" [disabled]="titleForm.controls['title'].invalid || titleForm.controls['description'].invalid "  tabindex="2">Save</button>
 </div>

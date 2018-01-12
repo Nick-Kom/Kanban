@@ -9,7 +9,7 @@ import {AlertConfirmDeleting} from "../../modal/alert-confirm/alert-confirm-dele
 @Component({
   selector: 'board-item',
   templateUrl: './board-item.component.html',
-  styleUrls: ['./board-item.component.less']
+  styleUrls: ['./board-item.component.less',  '../../../styles/alert.less']
 })
 export class BoardItemComponent implements OnInit {
   @Input() board:Board;
@@ -27,7 +27,7 @@ export class BoardItemComponent implements OnInit {
     this.titleForm = this.formBuilder.group({
       title: [this.board ? this.board.title : '',
         [Validators.required,
-          Validators.maxLength(40)
+          Validators.maxLength(50)
         ]]
     });
   }

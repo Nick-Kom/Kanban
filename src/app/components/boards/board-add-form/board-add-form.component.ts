@@ -17,7 +17,7 @@ export class BoardAddFormComponent implements OnInit {
     this.titleForm = this.formBuilder.group({
       title: ['',
         [Validators.required,
-          Validators.maxLength(40)
+          Validators.maxLength(50)
         ]]
     });
   }
@@ -28,10 +28,11 @@ export class BoardAddFormComponent implements OnInit {
   createBoard() {
     this.newBoard = false
     this.newBoardChange.emit(false);
+    let changeSpaces =  this.titleForm.value.title.replace(/\s{2,}/g, ' ');
     let board: Board = {
       id: '',
       date: new Date,
-      title: this.titleForm.value.title
+      title: changeSpaces
     }
     this.boardsService.addBoard(board)
   }

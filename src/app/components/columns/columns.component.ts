@@ -36,7 +36,7 @@ export class ColumnsComponent {
     this.titleForm = this.formBuilder.group({
       title: ['',
         [
-          Validators.maxLength(40)
+          Validators.maxLength(50)
         ]]
     });
 
@@ -56,10 +56,11 @@ export class ColumnsComponent {
   }
 
   createColumnTitle() {
+    let changeSpaces =  this.titleForm.value.title.replace(/\s{2,}/g, ' ')
     let column: Column = {
       id:'',
       date: new Date,
-      title: this.titleForm.value.title
+      title: changeSpaces
     }
     this.columnService.addColumn(column)
     this.newColumn = false;
