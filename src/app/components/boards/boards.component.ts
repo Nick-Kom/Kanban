@@ -12,6 +12,7 @@ export class BoardsComponent implements OnInit {
   user: any;
   boards: Board[];
   newBoard: boolean = false;
+  mode = 'indeterminate';
 
   constructor(private userService: UserService,
               private boardsService: BoardsService) {

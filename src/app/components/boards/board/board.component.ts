@@ -69,7 +69,7 @@ export class BoardComponent implements OnInit {
     this.changeTitle = false;
     this.showCancelBtn = true;
   }
-  shovEditBtn(){
+  showEditBtn(){
     this.changeTitle = true;
     this.showCancelBtn = false;
   }
@@ -77,6 +77,7 @@ export class BoardComponent implements OnInit {
   saveBoardTitle(date: Date) {
     this.boardsService.changeBoardTitle(this.boardId, date, this.titleForm.value.title)
     this.changeTitle = true;
+    this.showCancelBtn = false;
   }
 
   getCurrentBoard(board: Board) {

@@ -14,6 +14,10 @@ export class ColumnsComponent {
   boardId: any;
   newColumn: boolean = false;
   titleForm: FormGroup ;
+  color:string = 'primary';
+  mode:string = 'indeterminate';
+  value:number = 50;
+
 
   constructor(private route: ActivatedRoute,
               private columnService: ColumnService,

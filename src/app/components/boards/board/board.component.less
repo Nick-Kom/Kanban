@@ -1,37 +1,73 @@
+.wrap {
+ /* background-color: steelblue;*/
+  min-height: 100%;
+}
+
 .back {
   font-size: 36px;
   margin: 5px 0 5px 9px;
   cursor: pointer;
 }
 
-.board {
-  margin: 0 15px 20px 15px;
-  &-date {
-    font-size: 12px;
-    margin: 0;
-    color: cadetblue;
-  }
-  &-title {
-    padding: 14px;
+.board-wrap {
+  margin: 0 15px 15px 15px;
+}
 
-    &-h2 {
-      margin-bottom: 0;
-      word-wrap: break-word;
-      cursor: pointer;
+.board-card {
+  padding: 12px;
+
+  &-panel {
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+
+    &-title {
+      width: 70%;
+
+      &-h2 {
+        margin-bottom: 0;
+        word-wrap: break-word;
+        cursor: pointer;
+      }
+      &-date {
+        font-size: 12px;
+        margin: 0;
+        color: cadetblue;
+      }
     }
 
-    &-buttons {
-      float: right;
-
+    &-btns {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      align-items: center;
       .save-icon {
         color: #28a400;
       }
-
     }
   }
-
 }
 
 .mat-input-wrapper {
   margin: 0;
+}
+
+
+@media screen and (max-width: 700px) {
+  .board-card-panel-title {
+    width: 70%;
+  }
+
+  .board-card-panel-btns {
+    flex-direction: row;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .board-card-panel-btns {
+    width: 30%;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+  }
 }

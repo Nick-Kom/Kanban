@@ -1,11 +1,6 @@
 <app-toolbar></app-toolbar>
 
-<div *ngIf="user | async; then authenticated ">
-  <!-- template will replace this div -->
-</div>
-
-<!-- User logged in -->
-<ng-template #authenticated>
+<div *ngIf="user | async; else showProgressBar ">
   <div class="container-fluid boards-container">
     <div>
       <button class="btn-add"
@@ -26,5 +21,11 @@
       </board-add-form>
     </div>
   </div>
+</div>
+<ng-template #showProgressBar>
+  <mat-progress-bar
+    class="example-margin"
+    [mode]="mode">
+  </mat-progress-bar>
 </ng-template>
 

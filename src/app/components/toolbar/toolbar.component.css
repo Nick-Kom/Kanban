@@ -13,4 +13,9 @@
 }
 .logout-btn{
   font-weight: 600;
+  min-width: 50px;
+  padding: 0 7px;
+}
+.toolbar{
+  padding: 0 5px 0 10px;
 }

@@ -1,50 +1,54 @@
 <div class="column-scrol container">
-<div class=" columns-space">
-  <column-item
-    [column]="column"
-    *ngFor="let column of columns">
-
-  </column-item>
-  <form (ngSubmit)="createColumnTitle(); titleForm.reset()"
-        [formGroup]="titleForm">
-    <div class="column-width" *ngIf="newColumn">
-      <div class="column-background">
-        <mat-input-container>
-          <input matInput
-                 autofocus="autofocus"
-                 placeholder="Column title"
-                 formControlName="title">
-        </mat-input-container>
-        <div class="btn-row">
-          <button class="btn-row-save"
-                  mat-button type="submit"
-                  [disabled]="titleForm.invalid">
-            <mat-icon class="save-icon">save</mat-icon>
-          </button>
-          <button class="btn-row-clear"
-                  mat-button
-                  (click)="clearCardTitle()">
-            <mat-icon class="clear-icon">clear</mat-icon>
-          </button>
-        </div>
-        <mat-card class="alert" *ngIf="!titleForm.controls['title'].valid
+  <div class=" columns-space">
+    <column-item
+      [column]="column"
+      *ngFor="let column of columns">
+    </column-item>
+    <form (ngSubmit)="createColumnTitle(); titleForm.reset()"
+          [formGroup]="titleForm">
+      <div class="column-width" *ngIf="newColumn">
+        <div class="column-background">
+          <mat-input-container>
+            <input matInput
+                   autofocus="autofocus"
+                   placeholder="Column title"
+                   formControlName="title">
+          </mat-input-container>
+          <div class="btn-row">
+            <button class="btn-row-save"
+                    mat-button type="submit"
+                    [disabled]="titleForm.invalid">
+              <mat-icon class="save-icon">save</mat-icon>
+            </button>
+            <button class="btn-row-clear"
+                    mat-button
+                    (click)="clearCardTitle()">
+              <mat-icon class="clear-icon">clear</mat-icon>
+            </button>
+          </div>
+          <mat-card class="alert" *ngIf="!titleForm.controls['title'].valid
                         && titleForm.controls['title'].touched">
-          You must specify title in 50 characters
-        </mat-card>
+            You must specify title in 50 characters
+          </mat-card>
+        </div>
       </div>
-    </div>
-  </form>
-  <div class="add-position">
-    <div matTooltip="Add new column">
-      <button class="btn-add"
-              mat-mini-fab
-              type="button"
-              [disabled]="newColumn"
-              (click)="showCreateColumn()">
-        <mat-icon class="btn-add-icon">add</mat-icon>
-      </button>
+    </form>
+    <div class="add-position">
+      <div matTooltip="Add new column">
+        <button class="btn-add"
+                mat-mini-fab
+                type="button"
+                [disabled]="newColumn"
+                (click)="showCreateColumn()">
+          <mat-icon class="btn-add-icon">add</mat-icon>
+        </button>
+      </div>
     </div>
   </div>
 </div>
+<div class="progress-spinner-wrap">
+  <mat-progress-spinner *ngIf="!columns"
+    [mode]="mode"
+    [value]="value">
+  </mat-progress-spinner>
 </div>
-
