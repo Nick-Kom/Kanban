@@ -27,7 +27,7 @@
             </button>
           </div>
           <mat-card class="alert" *ngIf="!titleForm.controls['title'].valid
-                        && titleForm.controls['title'].touched">
+                        && titleForm.controls['title'].touched || spacesValidation">
             You must specify title in 50 characters
           </mat-card>
         </div>

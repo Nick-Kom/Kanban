@@ -29,15 +29,15 @@ export class CardItemComponent {
   todosLength: number;
   draggedCard: Card;
   dragBackground: boolean = false
-  todos:Todo[];
-  completedTodos:Todo[];
+  todos: Todo[];
+  completedTodos: Todo[];
+
   constructor(private cardService: CardService,
               private todoService: TodoService,
               private dialog: MatDialog,
               private formBuilder: FormBuilder) {
 
   }
-
 
 
   ngOnInit() {
@@ -64,10 +64,11 @@ export class CardItemComponent {
   }
 
 
-  onDrag(event:any){
+  onDrag(event: any) {
 
-  //  this.dragBackground = true
+    //  this.dragBackground = true
   }
+
   changeCardTitle() {
     this.cardTitle = true;
   }
@@ -77,15 +78,17 @@ export class CardItemComponent {
   }
 
   saveCardTitle(cardFormGroup: any) {
-    let card: Card = {
-      id: this.card.id,
-      position: this.card.position,
-      columnId: this.card.columnId,
-      title: cardFormGroup.title.replace(/\s{2,}/g, ' '),
-      description: cardFormGroup.description.replace(/\s{2,}/g, ' ')
-    };
-    this.cardService.changeCardTitle(card)
-    this.cardTitle = false;
+    if (/\S/.test(cardFormGroup.title)) {
+      let card: Card = {
+        id: this.card.id,
+        position: this.card.position,
+        columnId: this.card.columnId,
+        title: cardFormGroup.title.replace(/\s{2,}/g, ' '),
+        description: cardFormGroup.description.replace(/\s{2,}/g, ' ')
+      };
+      this.cardService.changeCardTitle(card)
+      this.cardTitle = false;
+    }
   }
 
   saveCardDescription() {
@@ -111,7 +114,7 @@ export class CardItemComponent {
 
   openDialog(): void {
     let dialogRef = this.dialog.open(CardDialog, {
-      width: '450px',
+      width: '550px',
       data: {title: this.card.title, card: this.card, description: this.card.description}
     });
 

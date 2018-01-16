@@ -54,13 +54,15 @@ export class ColumnItemComponent {
 
 
   changeColumnTitle() {
-    let changeSpaces =  this.titleForm.value.title.replace(/\s{2,}/g, ' ')
-    let column: Column = {
-      id: this.column.id,
-      date: this.column.date,
-      title: changeSpaces
-    };
-    this.columnService.changeColumnTitle(column);
+    if ( /\S/.test(this.titleForm.value.title) ) {
+      let changeSpaces = this.titleForm.value.title.replace(/\s{2,}/g, ' ')
+      let column: Column = {
+        id: this.column.id,
+        date: this.column.date,
+        title: changeSpaces
+      };
+      this.columnService.changeColumnTitle(column);
+    }
   }
 
   editColumnTitle() {
@@ -69,6 +71,12 @@ export class ColumnItemComponent {
 
   clearCardTitle() {
     this.changeColumn = false;
+    this.titleForm = this.formBuilder.group({
+      title: [this.column ? this.column.title : '',
+        [Validators.required,
+          Validators.maxLength(50)
+        ]]
+    });
   }
 
   deleteColumn(column: Column) {

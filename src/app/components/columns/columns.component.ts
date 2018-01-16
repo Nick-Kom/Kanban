@@ -17,7 +17,7 @@ export class ColumnsComponent {
   color:string = 'primary';
   mode:string = 'indeterminate';
   value:number = 50;
-
+  spacesValidation:boolean = false;
 
   constructor(private route: ActivatedRoute,
               private columnService: ColumnService,
@@ -39,7 +39,7 @@ export class ColumnsComponent {
 
     this.titleForm = this.formBuilder.group({
       title: ['',
-        [
+        [Validators.required,
           Validators.maxLength(50)
         ]]
     });
@@ -60,18 +60,26 @@ export class ColumnsComponent {
   }
 
   createColumnTitle() {
-    let changeSpaces =  this.titleForm.value.title.replace(/\s{2,}/g, ' ')
-    let column: Column = {
-      id:'',
-      date: new Date,
-      title: changeSpaces
+    console.log(/\S/.test(this.titleForm.value.title))
+    if ( /\S/.test(this.titleForm.value.title) ) {
+      this.spacesValidation = false;
+      let changeSpaces = this.titleForm.value.title.replace(/\s{2,}/g, ' ')
+      let column: Column = {
+        id: '',
+        date: new Date,
+        title: changeSpaces
+      }
+      this.columnService.addColumn(column)
+      this.newColumn = false;
+    } else {
+      this.spacesValidation = true;
+      console.log('Spacesss')
     }
-    this.columnService.addColumn(column)
-    this.newColumn = false;
   }
 
   clearCardTitle() {
     this.newColumn = false;
+    this.spacesValidation = false;
   }
 
 }

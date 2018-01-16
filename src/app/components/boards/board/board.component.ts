@@ -72,12 +72,20 @@ export class BoardComponent implements OnInit {
   showEditBtn(){
     this.changeTitle = true;
     this.showCancelBtn = false;
+    this.titleForm = this.formBuilder.group({
+      title: [this.boardName,
+        [Validators.required,
+          Validators.maxLength(40)
+        ]]
+    });
   }
 
   saveBoardTitle(date: Date) {
-    this.boardsService.changeBoardTitle(this.boardId, date, this.titleForm.value.title)
-    this.changeTitle = true;
-    this.showCancelBtn = false;
+    if ( /\S/.test(this.titleForm.value.title) ) {
+      this.boardsService.changeBoardTitle(this.boardId, date, this.titleForm.value.title)
+      this.changeTitle = true;
+      this.showCancelBtn = false;
+    }
   }
 
   getCurrentBoard(board: Board) {

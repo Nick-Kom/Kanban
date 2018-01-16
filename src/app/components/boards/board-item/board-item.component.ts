@@ -15,6 +15,7 @@ export class BoardItemComponent implements OnInit {
   @Input() board:Board;
   titleForm:FormGroup;
   showEditBoardTitle:boolean = false;
+  spacesValidation:boolean = false;
   constructor(
               private router: Router,
               private boardsService: BoardsService,
@@ -41,12 +42,23 @@ export class BoardItemComponent implements OnInit {
   }
 
   saveEditedBoardTitle(board: Board) {
-    this.showEditBoardTitle = false;
-    this.boardsService.changeBoardTitle(board.id, board.date, this.titleForm.value.title)
+    if ( /\S/.test(this.titleForm.value.title) ) {
+      this.spacesValidation = false;
+      this.showEditBoardTitle = false;
+      this.boardsService.changeBoardTitle(board.id, board.date, this.titleForm.value.title)
+    } else {
+      this.spacesValidation = true;
+    }
   }
 
   hideChangingBoardTitle(){
     this.showEditBoardTitle = false;
+    this.titleForm = this.formBuilder.group({
+      title: [this.board ? this.board.title : '',
+        [Validators.required,
+          Validators.maxLength(50)
+        ]]
+    });
   }
 
   openDialog(board: Board) {

@@ -9,11 +9,13 @@ import {Board} from "../board/board";
   styleUrls: ['./board-add-form.component.less', '../../../styles/alert.less']
 })
 export class BoardAddFormComponent implements OnInit {
-  @Input() newBoard:boolean;
+  @Input() newBoard: boolean;
   @Output() newBoardChange = new EventEmitter<boolean>();
   titleForm: FormGroup;
-  constructor(    private boardsService: BoardsService,
-                  private formBuilder: FormBuilder) {
+  spacesValidation:boolean = false;
+
+  constructor(private boardsService: BoardsService,
+              private formBuilder: FormBuilder) {
     this.titleForm = this.formBuilder.group({
       title: ['',
         [Validators.required,
@@ -26,19 +28,27 @@ export class BoardAddFormComponent implements OnInit {
   }
 
   createBoard() {
-    this.newBoard = false
-    this.newBoardChange.emit(false);
-    let changeSpaces =  this.titleForm.value.title.replace(/\s{2,}/g, ' ');
-    let board: Board = {
-      id: '',
-      date: new Date,
-      title: changeSpaces
+
+    if ( /\S/.test(this.titleForm.value.title) ) {
+      this.spacesValidation = false;
+      this.newBoard = false
+      this.newBoardChange.emit(false);
+      let changeSpaces = this.titleForm.value.title.replace(/\s{2,}/g, ' ');
+      let board: Board = {
+        id: '',
+        date: new Date,
+        title: changeSpaces
+      }
+      this.boardsService.addBoard(board)
+    } else {
+      this.spacesValidation = true;
+      console.log('Spacesss')
     }
-    this.boardsService.addBoard(board)
   }
 
-  hideBoardTitle(){
+  hideBoardTitle() {
     this.newBoard = false;
+    this.spacesValidation = false;
     this.newBoardChange.emit(false);
   }
 

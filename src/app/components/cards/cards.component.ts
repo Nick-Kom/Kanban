@@ -153,26 +153,26 @@ export class CardsComponent implements OnInit {
   }
 
   saveCardTitle() {
-
-    this.newCard = false;
-    var newPosition
-    let lastCardIndex = this.cards.length - 1
-    if (lastCardIndex >= 0) {
-      console.log('LastCard', this.cards[lastCardIndex])
-      newPosition = lastCardIndex + 1
+    if ( /\S/.test(this.titleForm.value.title) ) {
+      this.newCard = false;
+      var newPosition
+      let lastCardIndex = this.cards.length - 1
+      if (lastCardIndex >= 0) {
+        console.log('LastCard', this.cards[lastCardIndex])
+        newPosition = lastCardIndex + 1
+      }
+      else {
+        newPosition = 0
+      }
+      let changeSpaces = this.titleForm.value.title.replace(/\s{2,}/g, ' ')
+      let card: Card = {
+        columnId: this.columnId,
+        position: newPosition,
+        title: changeSpaces,
+        description: ' '
+      }
+      this.cardService.addCard(card)
     }
-    else {
-      newPosition = 0
-    }
-    let changeSpaces =  this.titleForm.value.title.replace(/\s{2,}/g, ' ')
-    let card: Card = {
-      columnId: this.columnId,
-      position: newPosition,
-      title: changeSpaces,
-      description: ' '
-    }
-    this.cardService.addCard(card)
-
   }
 
   clearCardTitle() {
