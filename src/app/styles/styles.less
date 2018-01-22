@@ -1,0 +1,67 @@
+
+.wrap-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.loading {
+  justify-content: center;
+  width: 120px;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+
+  .animation-block {
+    border-radius: 7%;
+    width: 26px;
+    height: 18px;
+    background-color: #64B5F6;
+    margin: 5px 2.5px 0 2.5px;
+    animation: pulse 1.5s alternate infinite ease-in-out;
+
+    &:nth-child(1) {
+      animation-delay: 0.25s;
+    }
+    &:nth-child(2) {
+      animation-delay: 0.5s;
+    }
+    &:nth-child(3) {
+      animation-delay: 0.75s;
+
+    }
+    &:nth-child(4) {
+      animation-delay: 1s;
+
+    }
+    &:nth-child(5) {
+      animation-delay: 1.25s;
+
+    }
+    &:nth-child(6) {
+      animation-delay: 1.5s
+
+    }
+    &:nth-child(7) {
+      animation-delay: 1.75s
+
+    }
+    &:nth-child(8) {
+      animation-delay: 2s
+
+    }
+    &:nth-child(9) {
+      animation-delay: 2.25s
+
+    }
+  }
+}
+
+@keyframes pulse {
+  to {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+}
